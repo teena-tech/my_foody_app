@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:online_swissy/checkout/checkout_screen.dart';
 import 'package:flutter/material.dart';
 
-class DeliveryDetailsScreen extends StatefulWidget {
+class DeliveryDetailssScreen extends StatefulWidget {
   @override
-  _DeliveryDetailsScreenState createState() => _DeliveryDetailsScreenState();
+  _DeliveryDetailssScreenState createState() => _DeliveryDetailssScreenState();
 }
 
-class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
+class _DeliveryDetailssScreenState extends State<DeliveryDetailssScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  // Controllers for the input fields
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _addressLine1Controller = TextEditingController();

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:online_swissy/checkout/checkout_screen.dart';
+import 'package:online_swissy/checkout/DeliveryScreen/DeliveryScreen.dart';
 import 'package:online_swissy/delieverydetails/delievery_screen.dart';
+import 'package:online_swissy/home/cart_provider.dart';
 import 'package:provider/provider.dart';
-import 'cart_provider.dart';
 
 class CartScreen extends StatelessWidget {
   @override
@@ -17,9 +17,7 @@ class CartScreen extends StatelessWidget {
         ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.grey[800]),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         backgroundColor: Colors.white,
         elevation: 1,
@@ -33,22 +31,20 @@ class CartScreen extends StatelessWidget {
             )
           : Column(
               children: [
-                // Cart Summary Header
+                // Header Section
                 Container(
+                  width: double.infinity,
                   padding: EdgeInsets.all(16),
                   color: Colors.green[800],
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "${cart.totalItems} Items",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  child: Center(
+                    child: Text(
+                      "${cart.cart.length} Dishes - ${cart.totalItems} Items",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ],
+                    ),
                   ),
                 ),
                 // Cart Items List
@@ -77,8 +73,21 @@ class CartScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                // Side Dot
+                                Container(
+                                  height: 10,
+                                  width: 10,
+                                  margin: EdgeInsets.only(right: 8),
+                                  decoration: BoxDecoration(
+                                    color: index % 2 == 0
+                                        ? Colors.green
+                                        : Colors
+                                            .red, // Green for veg, Red for non-veg
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                                // Dish Info
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
@@ -91,44 +100,77 @@ class CartScreen extends StatelessWidget {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      SizedBox(height: 5),
+                                      SizedBox(height: 4),
                                       Text(
-                                        "INR ${(item['price'] * item['quantity']).toStringAsFixed(2)}", // Total price for this item
+                                        "INR ${item['price'].toStringAsFixed(2)}",
                                         style: TextStyle(
-                                          fontSize: 14,
                                           color: Colors.green,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        "${item['calories']} calories",
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 12,
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                // Increment/Decrement Buttons
+                                // Quantity Selector
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.remove_circle,
+                                    // Decrease Button
+                                    Container(
+                                      height: 32,
+                                      width: 32,
+                                      decoration: BoxDecoration(
                                         color: Colors.green[800],
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                      onPressed: () {
-                                        cart.removeItem(dish);
-                                      },
-                                    ),
-                                    Text(
-                                      "${item['quantity']}",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
+                                      child: IconButton(
+                                        icon: Icon(
+                                          Icons.remove,
+                                          color: Colors.white,
+                                          size: 18,
+                                        ),
+                                        onPressed: () => cart.removeItem(dish),
+                                        padding: EdgeInsets.zero,
                                       ),
                                     ),
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.add_circle,
+                                    // Quantity Text
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text(
+                                        item['quantity'].toString(),
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    // Increase Button
+                                    Container(
+                                      height: 32,
+                                      width: 32,
+                                      decoration: BoxDecoration(
                                         color: Colors.green[800],
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                      onPressed: () {
-                                        cart.addItem(dish, item['price']);
-                                      },
+                                      child: IconButton(
+                                        icon: Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                          size: 18,
+                                        ),
+                                        onPressed: () =>
+                                            cart.addItem(dish, item['price']),
+                                        padding: EdgeInsets.zero,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -180,9 +222,9 @@ class CartScreen extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          elevation: 3, //
                         ),
                         onPressed: () {
+                          // Navigate to DeliveryDetailScreen
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -191,14 +233,14 @@ class CartScreen extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          "order",
+                          "Place Order",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

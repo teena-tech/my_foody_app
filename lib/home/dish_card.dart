@@ -14,8 +14,6 @@ class DishCard extends StatelessWidget {
         int quantity = cart.cart[dish['name']]?['quantity'] ?? 0;
         String imageUrl = dish['image_url'] ?? "";
 
-        print("🔗 Debug Image URL: $imageUrl");
-
         return Card(
           elevation: 3,
           margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -27,65 +25,64 @@ class DishCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Main Row
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: imageUrl.isNotEmpty && imageUrl.startsWith("http")
-                          ? Image.network(
-                              imageUrl,
-                              height: 80,
-                              width: 80,
-                              fit: BoxFit.cover,
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return Center(
-                                    child: CircularProgressIndicator());
-                              },
-                              errorBuilder: (context, error, stackTrace) {
-                                print("🚨 Image Load Error: $error");
-                                return _placeholderImage();
-                              },
-                            )
-                          : _placeholderImage(),
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        height: 70,
+                        width: 12,
+                        margin: EdgeInsets.only(top: 2),
+                        decoration: BoxDecoration(
+                          color:
+                              dish['isVeg'] == true ? Colors.green : Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
                     ),
-                    SizedBox(width: 10),
+                    SizedBox(width: 8),
+
+                    // Dish Details
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          // Dish Name
                           Text(
                             dish['name'] ?? "Unknown Dish",
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
                           ),
                           SizedBox(height: 5),
 
-                          // ✅ Price & Calories
+                          // Price & Calories
                           Row(
                             children: [
                               Text(
                                 "INR ${dish['price'] ?? "0.00"}",
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green,
+                                ),
                               ),
                               Spacer(),
                               Text(
                                 "${dish['calories'] ?? "N/A"} calories",
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.grey),
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
                               ),
                             ],
                           ),
                           SizedBox(height: 5),
 
+                          // Description
                           Text(
                             dish['description'] ?? "No description available.",
                             style: TextStyle(fontSize: 12, color: Colors.grey),
@@ -102,10 +99,33 @@ class DishCard extends StatelessWidget {
                         ],
                       ),
                     ),
+
+                    SizedBox(width: 10),
+
+                    // Dish Image
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: imageUrl.isNotEmpty && imageUrl.startsWith("http")
+                          ? Image.network(
+                              imageUrl,
+                              height: 80,
+                              width: 80,
+                              fit: BoxFit.cover,
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              },
+                              errorBuilder: (context, error, stackTrace) {
+                                return _placeholderImage();
+                              },
+                            )
+                          : _placeholderImage(),
+                    ),
                   ],
                 ),
                 SizedBox(height: 10),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -115,14 +135,16 @@ class DishCard extends StatelessWidget {
                           icon: Icon(Icons.remove_circle, color: Colors.red),
                           onPressed: () {
                             if (quantity > 0) {
-                              cart.removeItem(dish['name']); //
+                              cart.removeItem(dish['name']);
                             }
                           },
                         ),
                         Text(
                           quantity.toString(),
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         IconButton(
                           icon: Icon(Icons.add_circle, color: Colors.green),
@@ -150,7 +172,7 @@ class DishCard extends StatelessWidget {
       height: 80,
       width: 80,
       color: Colors.grey[300],
-      child: Icon(Icons.broken_image, size: 40, color: Colors.grey),
+      child: Icon(Icons.fastfood_rounded, size: 40, color: Colors.grey),
     );
   }
 }

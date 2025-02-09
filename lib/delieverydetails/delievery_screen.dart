@@ -21,7 +21,6 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // Construct the address from user inputs
       final String address =
           '${_addressLine1Controller.text}, ${_addressLine2Controller.text.isNotEmpty ? _addressLine2Controller.text + ', ' : ''}${_cityController.text}, ${_zipCodeController.text}';
 
@@ -41,10 +40,10 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Address Details"),
-        backgroundColor: Colors.white,
+        title: Text("Customer Details"),
+        backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
@@ -83,7 +82,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                 child: ElevatedButton(
                   onPressed: _submitForm,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.blueAccent, // Light green button
                     padding: EdgeInsets.symmetric(vertical: 16, horizontal: 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -91,7 +90,18 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
                   ),
                   child: Text(
                     "Proceed to Buy",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white, // White text
+                      shadows: [
+                        Shadow(
+                          offset: Offset(2.0, 2.0), // Position of the shadow
+                          blurRadius: 4.0, // Blur radius
+                          color: Colors.black54, // Shadow color
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -114,23 +124,23 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
         labelText: label,
         labelStyle: TextStyle(
           fontStyle: FontStyle.italic, // Italic label text
-          color: Colors.green[700],
+          color: Colors.black, // Light green label text
         ),
         filled: true,
-        fillColor: Colors.grey[100], // Light grey background
+        fillColor: Colors.white, // White background for text field
         contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 15),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12), // Rounded corners
           borderSide: BorderSide(
-            color: Colors.green[700]!,
-            width: 1.5, // Green border
+            color: Colors.redAccent, // Red border
+            width: 1.5,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12), // Rounded corners
           borderSide: BorderSide(
-            color: Colors.green[900]!,
-            width: 2.0, // Darker green when focused
+            color: Colors.red, // Darker red when focused
+            width: 2.0,
           ),
         ),
       ),
@@ -153,7 +163,7 @@ class _DeliveryDetailsScreenState extends State<DeliveryDetailsScreen> {
       style: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
-        color: Colors.green[800],
+        color: Colors.black, // Light green section heading
       ),
     );
   }

@@ -11,9 +11,10 @@ class CartProvider with ChangeNotifier {
 
   double get totalAmount {
     return _cart.values.fold(
-        0.0,
-        (sum, item) =>
-            sum + (item['quantity'] as int) * (item['price'] as double));
+      0.0,
+      (sum, item) =>
+          sum + (item['quantity'] as int) * (item['price'] as double),
+    );
   }
 
   void addItem(String dish, double price) {
@@ -32,7 +33,12 @@ class CartProvider with ChangeNotifier {
       } else {
         _cart.remove(dish);
       }
+      notifyListeners();
     }
+  }
+
+  void clearCart() {
+    _cart.clear();
     notifyListeners();
   }
 }
