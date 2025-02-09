@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "112248796042",
+    "project_id": "zomato-3354a",
+    "storage_bucket": "zomato-3354a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112248796042:android:71a21ca27d019a45b14e73",
+        "android_client_info": {
+          "package_name": "com.app.online_swissy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112248796042-9l8j4ri75gqvkgenoj548gkdntumkd8c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.online_swissy",
+            "certificate_hash": "81155f1093829d2410b46070c4e9c6812093db8d"
+          }
+        },
+        {
+          "client_id": "112248796042-t1g5qijuokq7brahkdetreiei3j1u83d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_IFJ6NZxj4yV2DV_iMiiUujCedw8K4ZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "112248796042-t1g5qijuokq7brahkdetreiei3j1u83d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
