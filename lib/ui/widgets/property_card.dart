@@ -1,5 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:online_swissy/data/models/property_model.dart';
+//
+// class PropertyCard extends StatelessWidget {
+//   final PropertyModel property;
+//
+//   const PropertyCard({Key? key, required this.property}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Card(
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           ClipRRect(
+//             borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+//             child: Image.network(
+//               property.imageUrl,
+//               height: 120,
+//               width: double.infinity,
+//               fit: BoxFit.cover,
+//             ),
+//           ),
 
 class PropertyCard extends StatelessWidget {
   final PropertyModel property;

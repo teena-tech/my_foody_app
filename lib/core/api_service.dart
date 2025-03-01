@@ -9,7 +9,6 @@ class ApiService {
           await _dio.get("https://dev.easysellrealty.in/api/home");
 
       print("API Response: ${response.data}");
-
       return response.data;
     } catch (e) {
       print("API Error: $e");

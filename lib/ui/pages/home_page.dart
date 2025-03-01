@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
       ),
       actions: [
         CircleAvatar(
-          backgroundImage: NetworkImage("https://i.pravatar.cc/300"),
+          backgroundImage: NetworkImage("https://i.pravatar.cc/220"),
         ),
         SizedBox(width: 16),
       ],

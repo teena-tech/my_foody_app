@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
         applicationId = "com.app.online_swissy"
-        minSdk = 24 // 🔹 Set to 24 (Increase to 26 if errors persist)
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -41,23 +41,11 @@ flutter {
 }
 
 dependencies {
-    // 🔹 Core Library Desugaring
+
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
-
-    // 🔹 Kotlin Standard Library
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
-    // 🔹 MultiDex Support
     implementation 'androidx.multidex:multidex:2.0.1'
-
-    // 🔹 Firebase BOM (Bill of Materials)
     implementation platform('com.google.firebase:firebase-bom:33.8.0')
-
-    // 🔹 Firebase Services (Auto-Managed Versions via BOM)
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-crashlytics'
-    implementation 'com.google.firebase:firebase-messaging'
-    implementation 'com.google.firebase:firebase-database'
+
 }
